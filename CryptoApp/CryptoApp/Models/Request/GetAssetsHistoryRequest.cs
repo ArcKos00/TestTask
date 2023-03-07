@@ -1,6 +1,6 @@
 ﻿namespace CryptoApp.Models.Request
 {
-    public class GetAssetsHistoryRequest : GetIdRequest
+    public class GetAssetsHistoryRequest
     {
         [Required]
         public string Interval { get; set; } = null!;
