@@ -1,10 +1,9 @@
 ﻿using CryptoApp.Models;
 using CryptoApp.Models.Response;
-using CryptoApp.Services.Interfaces;
-using Infrastructure;
-using Infrastructure.Services.Interfaces;
+using CryptoApp.Core.Interfaces;
+using CryptoApp.Models.Services.Interfaces;
 
-namespace CryptoApp.Services
+namespace CryptoApp.Models.Services
 {
     public class RatesService : IRatesService
     {

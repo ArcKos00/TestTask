@@ -2,8 +2,8 @@
 {
     public class GetAssetsRequest
     {
-        public string Search { get; set; } = null!;
-        public string Ids { get; set; } = null!;
+        public string? Search { get; set; }
+        public string? Ids { get; set; }
         public int? Limit { get; set; }
         public int? Offset { get; set; }
     }

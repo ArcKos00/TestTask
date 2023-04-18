@@ -12,6 +12,6 @@
         public double VolumeUsd24Hr { get; set; }
         public double PriceUsd { get; set; }
         public double? ChangePercent24Hr { get; set; }
-        public double Vwap24Hr { get; set; }
+        public double? Vwap24Hr { get; set; }
     }
 }

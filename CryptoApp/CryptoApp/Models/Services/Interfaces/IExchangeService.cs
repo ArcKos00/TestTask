@@ -1,10 +1,10 @@
 ﻿using CryptoApp.Models.Response;
 
-namespace CryptoApp.Services.Interfaces
+namespace CryptoApp.Models.Services.Interfaces
 {
     public interface IExchangeService
     {
         public Task<List<ExchangesResponse>> GetExchanges();
-        public Task<List<ExchangesResponse>> GetExchanges(string id);
+        public Task<ExchangesResponse> GetExchanges(string id);
     }
 }

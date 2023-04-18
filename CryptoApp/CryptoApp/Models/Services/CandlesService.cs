@@ -1,11 +1,10 @@
 ﻿using CryptoApp.Models;
 using CryptoApp.Models.Request;
 using CryptoApp.Models.Response;
-using CryptoApp.Services.Interfaces;
-using Infrastructure;
-using Infrastructure.Services.Interfaces;
+using CryptoApp.Core.Interfaces;
+using CryptoApp.Models.Services.Interfaces;
 
-namespace CryptoApp.Services
+namespace CryptoApp.Models.Services
 {
     public class CandlesService : ICandlesService
     {
@@ -22,7 +21,8 @@ namespace CryptoApp.Services
             {
                 Exchange = exchange,
                 Interval = interval,
-                BaseId = baseId
+                BaseId = baseId,
+                QuoteId = quoteId
             };
 
             if ((start != null && end != null) ||

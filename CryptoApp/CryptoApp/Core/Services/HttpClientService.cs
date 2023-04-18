@@ -1,6 +1,6 @@
-﻿using Infrastructure.Services.Interfaces;
+﻿using CryptoApp.Core.Interfaces;
 
-namespace CryptoApp.Services
+namespace CryptoApp.Core.Services
 {
     public class HttpClientService : IHttpClientService
     {
@@ -14,8 +14,6 @@ namespace CryptoApp.Services
         public async Task<TResponse> SendAsync<TResponse, TRequest>(string url, HttpMethod method, TRequest? content)
         {
             var client = _httpClient.CreateClient();
-            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer XXXX");
 
             var httpMessage = new HttpRequestMessage();
             httpMessage.RequestUri = new Uri(url);
@@ -35,7 +33,7 @@ namespace CryptoApp.Services
                 return response!;
             }
 
-            return default(TResponse) !;
+            return default!;
         }
     }
 }

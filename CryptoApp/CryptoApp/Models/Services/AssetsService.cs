@@ -1,11 +1,10 @@
 ﻿using CryptoApp.Models;
 using CryptoApp.Models.Request;
 using CryptoApp.Models.Response;
-using CryptoApp.Services.Interfaces;
-using Infrastructure;
-using Infrastructure.Services.Interfaces;
+using CryptoApp.Core.Interfaces;
+using CryptoApp.Models.Services.Interfaces;
 
-namespace CryptoApp.Services
+namespace CryptoApp.Models.Services
 {
     public class AssetsService : IAssetsService
     {
@@ -15,7 +14,7 @@ namespace CryptoApp.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<AssetsResponse>> GetAssets(string search = null!, string ids = null!, int? limit = null, int? offset = null)
+        public async Task<List<AssetsResponse>> GetAssets(string? search = null, string? ids = null, int? limit = null, int? offset = null)
         {
             var result = await _httpClient.SendAsync<BaseResponse<List<AssetsResponse>>, GetAssetsRequest>(
                 $"{Common.ApiUrl}/assets",
@@ -78,7 +77,7 @@ namespace CryptoApp.Services
             return result.Data!;
         }
 
-        public async Task<MarketsResponse> GetAssetMarkets(string id, int? limit, double? offset)
+        public async Task<List<AssetMarketResponse>> GetAssetMarkets(string id, int? limit, double? offset)
         {
             var request = new GetAssetsMarketsRequest();
 
@@ -89,14 +88,14 @@ namespace CryptoApp.Services
                 request.Offset = offset;
             }
 
-            var result = await _httpClient.SendAsync<BaseResponse<MarketsResponse>, GetAssetsMarketsRequest>(
+            var result = await _httpClient.SendAsync<BaseResponse<List<AssetMarketResponse>>, GetAssetsMarketsRequest>(
                 $"{Common.ApiUrl}/assets/{id}/markets",
                 HttpMethod.Get,
                 request);
 
             if (result == null)
             {
-                return new MarketsResponse();
+                return new List<AssetMarketResponse>();
             }
 
             return result.Data!;

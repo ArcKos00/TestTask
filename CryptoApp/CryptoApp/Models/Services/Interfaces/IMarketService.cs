@@ -1,6 +1,6 @@
 ﻿using CryptoApp.Models.Response;
 
-namespace CryptoApp.Services.Interfaces
+namespace CryptoApp.Models.Services.Interfaces
 {
     public interface IMarketService
     {

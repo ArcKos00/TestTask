@@ -1,10 +1,9 @@
 ﻿using CryptoApp.Models;
 using CryptoApp.Models.Response;
-using CryptoApp.Services.Interfaces;
-using Infrastructure;
-using Infrastructure.Services.Interfaces;
+using CryptoApp.Core.Interfaces;
+using CryptoApp.Models.Services.Interfaces;
 
-namespace CryptoApp.Services
+namespace CryptoApp.Models.Services
 {
     public class ExchangeService : IExchangeService
     {
@@ -30,16 +29,16 @@ namespace CryptoApp.Services
             return result.Data!;
         }
 
-        public async Task<List<ExchangesResponse>> GetExchanges(string id)
+        public async Task<ExchangesResponse> GetExchanges(string id)
         {
-            var result = await _httpClient.SendAsync<BaseResponse<List<ExchangesResponse>>, object>(
+            var result = await _httpClient.SendAsync<BaseResponse<ExchangesResponse>, object>(
                 $"{Common.ApiUrl}/exchanges/{id}",
                 HttpMethod.Get,
                 null);
 
             if (result == null)
             {
-                return new List<ExchangesResponse>();
+                return new ExchangesResponse();
             }
 
             return result.Data!;
