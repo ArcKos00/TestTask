@@ -15,10 +15,23 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="10">
-                        <TextBlock Text="{Binding Path=Id}"/>
-                        <TextBlock Text="{Binding Path=Rank}"/>
-                    </StackPanel>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <StackPanel Margin="5">
+                            <TextBlock>
+                                <Run Text="Name:"/>
+                                <Run Text="{Binding Name}"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Rank:"/>
+                                <Run Text="{Binding Rank}"/>
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Cost Usd:"/>
+                                <Run Text="{Binding PriceUsd}"/>
+                            </TextBlock>
+                            <TextBlock Text="{Binding Symbol}"/>
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

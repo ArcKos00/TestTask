@@ -12,7 +12,6 @@ namespace CryptoApp.Core.Services
         public NavigationService(Func<Type, BaseViewModel> viewModelFactory)
         {
             _viewModelFactory = viewModelFactory;
-            NavigateTo<HomePageViewModel>();
         }
 
         public BaseViewModel CurrentView

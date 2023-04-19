@@ -12,7 +12,6 @@ namespace CryptoApp
 {
     public partial class App : Application
     {
-        private readonly int _countItemsOnHomePage = 10;
         private readonly IHost _host;
         public App()
         {
@@ -27,10 +26,7 @@ namespace CryptoApp
                     services.AddTransient<IRatesService, RatesService>();
                     services.AddTransient<IHttpClientService, HttpClientService>();
 
-                    services.AddTransient(provider => new HomePageViewModel(provider.GetRequiredService<IAssetsService>())
-                    {
-                        CountCoins = _countItemsOnHomePage
-                    });
+                    services.AddTransient<HomePageViewModel>();
                     services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<CoinPageViewModel>();
 

@@ -9,11 +9,13 @@ namespace CryptoApp.ViewModel
 {
     public class HomePageViewModel : BaseViewModel
     {
+        private readonly INavigationService _navigationService;
         private readonly IAssetsService _assetsService;
-        private ObservableCollection<AssetsResponse> _mainCoins = new ObservableCollection<AssetsResponse>();
+        private ObservableCollection<AssetsResponse> _mainCoins = new ();
 
-        public HomePageViewModel(IAssetsService assetsService)
+        public HomePageViewModel(IAssetsService assetsService, INavigationService navigationService)
         {
+            _navigationService = navigationService;
             _assetsService = assetsService;
             FillStartMenu();
             _mainCoins.CollectionChanged += (object? sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged();
@@ -32,7 +34,7 @@ namespace CryptoApp.ViewModel
             }
         }
 
-        public int CountCoins { get; init; }
+        public int CountCoins { get; init; } = 10;
 
         private async void FillStartMenu()
         {

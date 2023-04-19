@@ -16,9 +16,8 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal">
+        <StackPanel Grid.ColumnSpan="3">
             <Button Content="Home" Margin="3" Height="25" Command="{Binding Path=NavigateToHome}"/>
-            <Button Content="BABA" Margin="3"  Height="25" Command="{Binding Path=NavigateToBABA}"/>
         </StackPanel>
         <Label Grid.Column="0" Grid.Row="1">Search:</Label>
         <TextBox Grid.Column="1" Grid.Row="1" Margin="4,4,4,4" x:Name="SearchBox"/>
