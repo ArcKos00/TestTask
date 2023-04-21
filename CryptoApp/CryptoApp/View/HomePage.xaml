@@ -30,7 +30,7 @@
                                 <Run Text="{Binding PriceUsd}"/>
                             </TextBlock>
                             <TextBlock Text="{Binding Symbol}"/>
-                            <Button Content="My Carma((" Command="{Binding DataContext.GoToCoin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Id}"/>
+                            <Button Content="Go to Coin" Command="{Binding DataContext.GoToCoin, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Id}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

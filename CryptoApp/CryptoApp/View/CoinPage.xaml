@@ -7,6 +7,106 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="Azure">
-        <TextBlock Text="{Binding Coin.Id}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock>
+                <Run Text="Name: "/>
+                <Run Text="{Binding Coin.Name}"/>
+            </TextBlock>
+            <TextBlock>     
+                <Run Text="Rank: "/>
+                <Run Text="{Binding Coin.Rank}"/>
+            </TextBlock>
+            <TextBlock>
+                <Run Text="Symbol: "/>
+                <Run Text="{Binding Coin.Symbol}"/>
+            </TextBlock>
+            <TextBlock>
+                <Run Text="Price Usd: "/>
+                <Run Text="{Binding Coin.PriceUsd}"/>
+            </TextBlock>
+            <TextBlock>
+                <Run Text="VolumeUsd24Hr: "/>
+                <Run Text="{Binding Coin.VolumeUsd24Hr}"/>
+            </TextBlock>
+            <TextBlock>
+                <Run Text="Supply: "/>
+                <Run Text="{Binding Coin.Supply}"/>
+            </TextBlock>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.45*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.06*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.06*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Markets:"/>
+                <ListBox Grid.Row="1" Margin="0,0,0,4" ItemsSource="{Binding Markets}" SelectedItem="{Binding Market}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock>
+                                    <Run Text="Market: "/>
+                                    <Run Text="{Binding ExchangeId}"/>
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Price Usd: "/>
+                                    <Run Text="{Binding PriceUsd}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Content="Sort Price" Command="{Binding Sort}" CommandParameter="Price"/>
+                    <Button Content="Sort Market" Command="{Binding Sort}" CommandParameter="ExchangeId"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Column="1" DataContext="{Binding Market}">
+                <TextBlock>
+                    <Run Text="Market: "/>
+                    <Run Text="{Binding ExchangeId}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Coin: "/>
+                    <Run Text="{Binding BaseId}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Quote: "/>
+                    <Run Text="{Binding QuoteId}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Symbol: "/>
+                    <Run Text="{Binding BaseSymbol}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="QuoteSymbol: "/>
+                    <Run Text="{Binding QuoteSymbol}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Volume USD 24 Hr: "/>
+                    <Run Text="{Binding VolumeUsd24Hr}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Price Usd: "/>
+                    <Run Text="{Binding PriceUsd}"/>
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="VolumePercent: "/>
+                    <Run Text="{Binding VolumePercent}"/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

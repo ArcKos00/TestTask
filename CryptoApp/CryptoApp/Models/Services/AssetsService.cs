@@ -77,7 +77,7 @@ namespace CryptoApp.Models.Services
             return result.Data!;
         }
 
-        public async Task<List<AssetMarketResponse>> GetAssetMarkets(string id, int? limit, double? offset)
+        public async Task<List<AssetMarketResponse>> GetAssetMarkets(string id, int? limit = null, double? offset = null)
         {
             var request = new GetAssetsMarketsRequest();
 

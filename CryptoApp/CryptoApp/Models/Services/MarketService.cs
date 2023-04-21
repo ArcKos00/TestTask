@@ -15,15 +15,15 @@ namespace CryptoApp.Models.Services
         }
 
         public async Task<List<MarketsResponse>> GetMarkets(
-            string? exchangeId,
-            string? baseId,
-            string? baseSymbol,
-            string? quoteId,
-            string? quoteSymbol,
-            string? assetId,
-            string? assetSymbol,
-            int? limit,
-            double? offset)
+            string? exchangeId = null,
+            string? baseId = null,
+            string? baseSymbol = null,
+            string? quoteId = null,
+            string? quoteSymbol = null,
+            string? assetId = null,
+            string? assetSymbol = null,
+            int? limit = null,
+            double? offset = null)
         {
             var result = await _httpClient.SendAsync<BaseResponse<List<MarketsResponse>>, GetMarketsRequest>(
                 $"{Common.ApiUrl}/markets",
