@@ -19,6 +19,7 @@ namespace CryptoApp.ViewModel
             _assetsService = assetsService;
             FillStartMenu();
             _mainCoins.CollectionChanged += (object? sender, NotifyCollectionChangedEventArgs e) => OnPropertyChanged();
+            GoToCoin = new RelayCommand(o => _navigationService.NavigateTo<CoinPageViewModel>((string)o), o => true);
         }
 
         public ObservableCollection<AssetsResponse> MainCoins
@@ -35,6 +36,8 @@ namespace CryptoApp.ViewModel
         }
 
         public int CountCoins { get; init; } = 10;
+
+        public ICommand GoToCoin { get; set; }
 
         private async void FillStartMenu()
         {

@@ -26,12 +26,7 @@ namespace CryptoApp.ViewModel
 
         public async Task Prefetch(string id)
         {
-            await ChangeCoin(id);
-        }
-
-        private async Task ChangeCoin(string coinId)
-        {
-            Coin = await _assetsService.GetAsset(coinId);
+            Coin = await _assetsService.GetAsset(id);
         }
     }
 }
