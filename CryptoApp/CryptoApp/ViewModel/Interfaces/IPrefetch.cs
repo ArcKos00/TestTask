@@ -1,7 +1,7 @@
 ﻿namespace CryptoApp.ViewModel.Interfaces
 {
-    public interface IPrefetch
+    public interface IPrefetch<T>
     {
-        Task Prefetch(string id);
+        Task Prefetch(T id);
     }
 }

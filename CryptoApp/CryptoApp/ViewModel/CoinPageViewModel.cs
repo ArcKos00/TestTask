@@ -5,12 +5,13 @@ using CryptoApp.ViewModel.Interfaces;
 
 namespace CryptoApp.ViewModel
 {
-    public class CoinPageViewModel : BaseViewModel, IPrefetch
+    public class CoinPageViewModel : BaseViewModel, IPrefetch<string>
     {
         private readonly IAssetsService _assetsService;
         private AssetsResponse _asset = null!;
         private AssetMarketResponse _selectedMarket = null!;
-        private List<AssetMarketResponse> _markets = new List<AssetMarketResponse>();
+        private List<AssetMarketResponse> _markets = new ();
+        private string _marketName = string.Empty;
         public CoinPageViewModel(IAssetsService assetService)
         {
             _assetsService = assetService;
@@ -41,7 +42,19 @@ namespace CryptoApp.ViewModel
 
         public List<AssetMarketResponse> Markets
         {
-            get => _markets;
+            get
+            {
+                if (string.IsNullOrEmpty(_marketName))
+                {
+                    return _markets;
+                }
+
+                return _markets
+                    .Where(w => w.ExchangeId
+                        .ToUpper()
+                        .Contains(MarketName.ToUpper()))
+                    .ToList();
+            }
             set
             {
                 _markets = value;
@@ -49,10 +62,22 @@ namespace CryptoApp.ViewModel
             }
         }
 
+        public string MarketName
+        {
+            get => _marketName;
+            set
+            {
+                _marketName = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Markets));
+            }
+        }
+
         public async Task Prefetch(string id)
         {
             Coin = await _assetsService.GetAsset(id);
             Markets = await _assetsService.GetAssetMarkets(id);
+            Market = Markets[0];
         }
 
         private void SortWith(object param)

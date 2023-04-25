@@ -7,7 +7,7 @@ namespace CryptoApp.Core.Interfaces
         BaseViewModel CurrentView { get; }
         void NavigateTo<T>()
             where T : BaseViewModel;
-        Task NavigateTo<T>(string id)
-            where T : BaseViewModel, IPrefetch;
+        Task NavigateTo<T, TPreType>(TPreType? id)
+            where T : BaseViewModel, IPrefetch<TPreType>;
     }
 }

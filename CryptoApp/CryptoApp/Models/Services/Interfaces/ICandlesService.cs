@@ -4,6 +4,6 @@ namespace CryptoApp.Models.Services.Interfaces
 {
     public interface ICandlesService
     {
-        public Task<List<Candles>> GetCandles(string exchange, string interval, string baseId, string quoteId, long? start = null, long? end = null);
+        public Task<List<CandlesResponse>> GetCandles(string exchange, string interval, string baseId, string quoteId, long? start = null, long? end = null);
     }
 }

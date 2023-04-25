@@ -15,9 +15,11 @@ namespace CryptoApp.Core.Services
         {
             var client = _httpClient.CreateClient();
 
-            var httpMessage = new HttpRequestMessage();
-            httpMessage.RequestUri = new Uri(url);
-            httpMessage.Method = method;
+            var httpMessage = new HttpRequestMessage
+            {
+                RequestUri = new Uri(url),
+                Method = method
+            };
 
             if (content != null)
             {

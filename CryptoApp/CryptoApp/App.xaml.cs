@@ -1,4 +1,5 @@
-﻿using CryptoApp.ViewModel;
+﻿using System.IO;
+using CryptoApp.ViewModel;
 using CryptoApp.View;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +8,7 @@ using CryptoApp.Core.Interfaces;
 using CryptoApp.Models.Services.Interfaces;
 using CryptoApp.Models.Services;
 using CryptoApp.Core.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace CryptoApp
 {
@@ -15,6 +17,8 @@ namespace CryptoApp
         private readonly IHost _host;
         public App()
         {
+            var config = GetConfigure();
+
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                 {
@@ -26,13 +30,17 @@ namespace CryptoApp
                     services.AddTransient<IRatesService, RatesService>();
                     services.AddTransient<IHttpClientService, HttpClientService>();
 
-                    services.AddTransient<HomePageViewModel>();
+                    services.AddSingleton<INavigationService, NavigationService>();
+                    services.AddSingleton<Func<Type, BaseViewModel>>(serviceProvider => viewModelType => (BaseViewModel)serviceProvider.GetRequiredService(viewModelType));
+
                     services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<CoinPageViewModel>();
-
-                    services.AddSingleton<INavigationService, NavigationService>();
-
-                    services.AddSingleton<Func<Type, BaseViewModel>>(serviceProvider => viewModelType => (BaseViewModel)serviceProvider.GetRequiredService(viewModelType));
+                    services.AddTransient<SearchViewModel>();
+                    services.AddTransient(provider =>
+                        new HomePageViewModel(provider.GetRequiredService<IAssetsService>(), provider.GetRequiredService<INavigationService>())
+                        {
+                            ItemsOnPage = config.GetValue<int>("CountItemsOnPage")
+                        });
 
                     services.AddSingleton(provider => new MainWindow
                     {
@@ -47,7 +55,7 @@ namespace CryptoApp
             await _host.StartAsync();
 
             var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-            _host.Services.GetRequiredService<INavigationService>().NavigateTo<HomePageViewModel>();
+            await _host.Services.GetRequiredService<INavigationService>().NavigateTo<HomePageViewModel, object>(default);
             mainWindow.Show();
 
             base.OnStartup(e);
@@ -61,6 +69,16 @@ namespace CryptoApp
             }
 
             base.OnExit(e);
+        }
+
+        private IConfiguration GetConfigure()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            return builder.Build();
         }
     }
 }

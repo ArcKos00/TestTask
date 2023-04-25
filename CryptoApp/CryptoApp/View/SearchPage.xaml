@@ -6,7 +6,26 @@
              xmlns:local="clr-namespace:CryptoApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="Azure">
+        <ListBox ItemsSource="{Binding SearchResult}" SelectedItem="{Binding Select}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock>
+                                    <Run Text="Rank: "/>
+                                    <Run Text="{Binding Rank}"/>
+                        </TextBlock>
+                        <TextBlock>
+                                    <Run Text="Name: "/>
+                                    <Run Text="{Binding Name}"/>
+                        </TextBlock>
+                        <TextBlock>
+                                    <Run Text="Symbol: "/>
+                                    <Run Text="{Binding Symbol}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

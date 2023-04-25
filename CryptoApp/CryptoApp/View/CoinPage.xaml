@@ -52,7 +52,7 @@
                     <RowDefinition Height="0.06*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Markets:"/>
-                <ListBox Grid.Row="1" Margin="0,0,0,4" ItemsSource="{Binding Markets}" SelectedItem="{Binding Market}">
+                <ListBox Grid.Row="1" Margin="0,0,0,4" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemsSource="{Binding Markets}" SelectedItem="{Binding Market}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -69,8 +69,9 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <Button Content="Sort Price" Command="{Binding Sort}" CommandParameter="Price"/>
-                    <Button Content="Sort Market" Command="{Binding Sort}" CommandParameter="ExchangeId"/>
+                    <Button Margin="0,0,2,0" Content="Sort Price" Command="{Binding Sort}" CommandParameter="Price"/>
+                    <Button Margin="2,0,4,0" Content="Sort Market" Command="{Binding Sort}" CommandParameter="ExchangeId"/>
+                    <TextBox Width="105" Text="{Binding MarketName, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Grid>
             <StackPanel Grid.Column="1" DataContext="{Binding Market}">
@@ -106,6 +107,14 @@
                     <Run Text="VolumePercent: "/>
                     <Run Text="{Binding VolumePercent}"/>
                 </TextBlock>
+                <TextBlock/>
+                <TextBlock/>
+                <TextBlock/>
+                <TextBlock/>
+                <TextBlock Text="Скоро буде"/>
+                <TextBlock Text="Кнопка для перегляду сторінки цієї монети у вибраному маркеті"/>
+                <TextBlock Text="Саме тут повинні бути графіки зміни і тд. Оскільки на кожному ринку свої зміни"/>
+                <Button HorizontalAlignment="Left" Width="120" Content="Кнопка Клик-Клик"></Button>
             </StackPanel>
         </Grid>
     </Grid>

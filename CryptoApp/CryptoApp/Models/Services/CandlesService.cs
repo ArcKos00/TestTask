@@ -15,7 +15,7 @@ namespace CryptoApp.Models.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<Candles>> GetCandles(string exchange, string interval, string baseId, string quoteId, long? start = null, long? end = null)
+        public async Task<List<CandlesResponse>> GetCandles(string exchange, string interval, string baseId, string quoteId, long? start = null, long? end = null)
         {
             var request = new GetCandlesRequest
             {
@@ -32,25 +32,17 @@ namespace CryptoApp.Models.Services
                 request.End = end;
             }
 
-            var httpResult = await _httpClient.SendAsync<BaseResponse<List<CandlesResponse>>, GetCandlesRequest>(
+            var result = await _httpClient.SendAsync<BaseResponse<List<CandlesResponse>>, GetCandlesRequest>(
                 $"{Common.ApiUrl}/candles",
                 HttpMethod.Get,
                 request);
 
-            if (httpResult == null)
+            if (result == null)
             {
-                return new List<Candles>();
+                return new List<CandlesResponse>();
             }
 
-            return httpResult.Data?.Select(s => new Candles
-            {
-                Close = s.Close,
-                High = s.High,
-                Low = s.Low,
-                Open = s.Open,
-                Volume = s.Volume,
-                Period = DateTime.FromFileTime(s.Period),
-            }).ToList() !;
+            return result.Data !;
         }
     }
 }

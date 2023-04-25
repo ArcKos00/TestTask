@@ -1,6 +1,5 @@
 ﻿using CryptoApp.Core.Interfaces;
 using CryptoApp.ViewModel.Interfaces;
-using CryptoApp.ViewModel;
 
 namespace CryptoApp.Core.Services
 {
@@ -34,13 +33,13 @@ namespace CryptoApp.Core.Services
             CurrentView = viewModel;
         }
 
-        public async Task NavigateTo<T>(string id)
-            where T : BaseViewModel, IPrefetch
+        public async Task NavigateTo<T, TPreType>(TPreType? id)
+            where T : BaseViewModel, IPrefetch<TPreType>
         {
             NavigateTo<T>();
-            if (CurrentView is IPrefetch prefetch)
+            if (CurrentView is IPrefetch<TPreType> prefetch)
             {
-                await prefetch.Prefetch(id);
+                await prefetch.Prefetch(id!);
             }
         }
     }

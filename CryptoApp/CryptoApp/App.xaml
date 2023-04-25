@@ -18,5 +18,9 @@
             <view:CandlesPage />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type TypeName=viewModel:SearchViewModel}">
+            <view:SearchPage/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

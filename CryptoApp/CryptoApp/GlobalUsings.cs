@@ -8,4 +8,6 @@ global using System.Windows.Controls;
 global using System.Windows.Input;
 global using System.Net.Http;
 global using System.ComponentModel.DataAnnotations;
+global using System.Collections.ObjectModel;
+global using System.Collections.Specialized;
 global using Newtonsoft.Json;
