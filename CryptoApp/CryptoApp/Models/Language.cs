@@ -2,5 +2,6 @@
 {
     public class Language
     {
+        public string Hello { get; set; } = null!;
     }
 }

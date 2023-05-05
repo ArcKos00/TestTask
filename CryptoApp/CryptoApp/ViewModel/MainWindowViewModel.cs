@@ -16,6 +16,7 @@ namespace CryptoApp.ViewModel
             _langService = langService;
             NavigateToHome = new RelayCommand(o => _navigationService.NavigateTo<HomePageViewModel, object>(default), o => true);
             Search = new RelayCommand(Searchs, o => true);
+            _langService.SetLanguage("en");
         }
 
         public INavigationService Navigation

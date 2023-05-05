@@ -1,5 +1,4 @@
-﻿using System.IO;
-using CryptoApp.ViewModel;
+﻿using CryptoApp.ViewModel;
 using CryptoApp.View;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +31,7 @@ namespace CryptoApp
 
                     services.AddSingleton<INavigationService, NavigationService>();
                     services.AddSingleton<Func<Type, BaseViewModel>>(serviceProvider => viewModelType => (BaseViewModel)serviceProvider.GetRequiredService(viewModelType));
+                    services.AddSingleton<ILangService, LanguageService>();
 
                     services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<CoinPageViewModel>();
