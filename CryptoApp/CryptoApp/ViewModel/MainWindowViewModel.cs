@@ -7,16 +7,13 @@ namespace CryptoApp.ViewModel
     public class MainWindowViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly ILangService _langService;
         private string _searchFor = string.Empty;
 
-        public MainWindowViewModel(INavigationService navigationService, ILangService langService)
+        public MainWindowViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            _langService = langService;
             NavigateToHome = new RelayCommand(o => _navigationService.NavigateTo<HomePageViewModel, object>(default), o => true);
             Search = new RelayCommand(Searchs, o => true);
-            _langService.SetLanguage("en");
         }
 
         public INavigationService Navigation
@@ -26,11 +23,6 @@ namespace CryptoApp.ViewModel
             {
                 _navigationService = value;
             }
-        }
-
-        public Language Lang
-        {
-            get => _langService.Lang;
         }
 
         public string SearchString

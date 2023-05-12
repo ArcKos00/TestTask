@@ -31,7 +31,6 @@ namespace CryptoApp
 
                     services.AddSingleton<INavigationService, NavigationService>();
                     services.AddSingleton<Func<Type, BaseViewModel>>(serviceProvider => viewModelType => (BaseViewModel)serviceProvider.GetRequiredService(viewModelType));
-                    services.AddSingleton<ILangService, LanguageService>();
 
                     services.AddTransient<MainWindowViewModel>();
                     services.AddTransient<CoinPageViewModel>();
