@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    environment {
+        dotnet = 'C:\\Program Files\\dotnet\\dotnet.exe'
+    }
+    
+    stages{
+        stage('Checkout Stage') {
+            steps {
+                git branch: 'main', changelog: false, credentialsId: '97f869d8-4f2d-4769-a533-a9cede654454', poll: false, url: 'https://github.com/HypeRoomAI/Hyperoom.git'
+            }
+        }
+        
+        stage('Publish Stage') {
+            steps {
+                dir('Linker.Server') {
+                    bat 'dotnet publish -c Release'
+                }
+            }
+        }
+        
+        stage('Deploy Stage') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'iis-credential', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    bat """ "C:\\Program Files (x86)\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -source:iisApp="${WORKSPACE}\\Linker.Server\\bin\\Release\\net6.0\\publish" -enableRule:AppOffline -dest:iisApp="influencelinker.com",UserName="$USERNAME",Password="$PASSWORD",AuthType="Basic" -allowUntrusted"""
+                }
+            }
+        }
+    }
+}
